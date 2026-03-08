@@ -1,0 +1,78 @@
+/* Container och layout */
+.header {
+    background-color: #f0f0f0;
+    padding: 0 20px;
+}
+
+.nav-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 80px;
+}
+
+.logo a {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Lista med flikar */
+.nav-links {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: flex-end;
+}
+
+/* Alla länkar */
+.nav-links a {
+    box-sizing: content-box;
+    text-decoration: none;
+    padding: 6px 18px;
+    padding-top: 15px;
+    border-radius: 8px 8px 0 0;
+    background-color: #d9d9d9;
+    color: #333;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+    bottom: 3px;
+}
+
+/* Hover-effekt */
+.nav-links a:hover {
+    background-color: #c0c0c0;
+    border-bottom: 7px solid #c0c0c0;
+    color: #000;
+    position: relative;
+    bottom: 10px;
+}
+
+/* Aktiv flik */
+.nav-links a.active {
+    background-color: #fff;
+    border-bottom: 7px solid #fff;
+    color: #000;
+    position: relative;
+    bottom: 10px;
+}
+
+/* Logout-knappen */
+.logout-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+}
