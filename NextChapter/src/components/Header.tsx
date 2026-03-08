@@ -16,7 +16,7 @@ const Header = () => {
         <ul className="nav-links">
           <li>
             <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
-              Home
+              Hem
             </NavLink>
           </li>
 
@@ -24,12 +24,12 @@ const Header = () => {
             <>
               <li>
                 <NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>
-                  Profile
+                  Profil
                 </NavLink>
               </li>
               <li>
                 <button className="logout-btn" onClick={logout}>
-                  Logout
+                  Logga ut
                 </button>
               </li>
             </>
@@ -37,12 +37,12 @@ const Header = () => {
             <>
               <li>
                 <NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""}>
-                  Login
+                  Logga in
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/register" className={({ isActive }) => isActive ? "active" : ""}>
-                  Register
+                  Registrera
                 </NavLink>
               </li>
             </>

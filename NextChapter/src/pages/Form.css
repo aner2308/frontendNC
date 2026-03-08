@@ -1,0 +1,46 @@
+.form-container {
+  max-width: 400px;
+  margin: 50px auto;
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: 500;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px;
+  background: #504776;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #42366b;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+.success {
+  color: #2ecc71;
+}
