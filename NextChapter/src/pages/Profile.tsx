@@ -43,7 +43,7 @@ const Profile = () => {
                         try {
 
                             const googleRes = await fetch(
-                                `https://www.googleapis.com/books/v1/volumes/${status.bookId}&key=${API_KEY}`
+                                `https://www.googleapis.com/books/v1/volumes/${status.bookId}?key=${API_KEY}`
                             );
 
                             const googleData = await googleRes.json();

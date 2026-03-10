@@ -1,0 +1,12 @@
+.add-book-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f3f3f3;
+  border-radius: 8px;
+}
+
+.add-book-section select,
+.add-book-section button {
+  margin-right: 1rem;
+  padding: 8px 12px;
+}
