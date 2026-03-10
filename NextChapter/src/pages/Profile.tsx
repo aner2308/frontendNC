@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import "./Profile.css";
 import StatsCard from "../components/StatsCard";
 import BookList from "../components/BookList";
-import type { UserBook } from "../types/UserBook";
+import type { BookStatusType, UserBook } from "../types/UserBook";
 
 interface BookStatus {
     _id: string;
@@ -75,6 +75,44 @@ const Profile = () => {
         fetchBooks();
     }, [token]);
 
+    //UPPDATERA STATUS
+    const updateStatus = async (bookId: string, newStatus: "want-to-read" | "reading" | "finished", pagesRead?: number) => {
+        try {
+            const res = await fetch("http://localhost:5000/api/books", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                body: JSON.stringify({ bookId, status: newStatus, pagesRead }),
+            });
+
+            if (!res.ok) {
+                const data = await res.json();
+                console.error(data.message);
+                return;
+            }
+
+            setBooks(prev => prev.map(b => b.bookId === bookId ? { ...b, status: newStatus, pagesRead: pagesRead ?? b.pagesRead } : b));
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    //RADERA BOK
+    const deleteBook = async (bookId: string) => {
+        try {
+            const book = books.find(b => b.bookId === bookId);
+            if (!book) return;
+
+            await fetch(`http://localhost:5000/api/books/${book._id}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            setBooks(prev => prev.filter(b => b.bookId !== bookId));
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     // Statistik
     const totalBooksRead = books.filter(b => b.status === "finished").length;
 
@@ -98,7 +136,7 @@ const Profile = () => {
 
             <section>
                 <h3>Mina böcker</h3>
-                <BookList books={books} />
+                <BookList books={books} token={token} onStatusChange={updateStatus} onDelete={deleteBook} />
             </section>
 
             <button onClick={logout}>Logga ut</button>

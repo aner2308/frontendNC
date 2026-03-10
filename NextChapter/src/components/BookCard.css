@@ -1,13 +1,78 @@
+.book-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .book-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .book-card {
-  background: white;
-  border-radius: 8px;
-  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .book-card img {
-  width: 100px;
+  width: 150px;
   height: auto;
-  margin-bottom: 10px;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.book-card h4 {
+  font-size: 1.6rem;
+  margin: 0.5rem 0 0.2rem;
+}
+
+.book-card p {
+  margin: 0.2rem 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.book-card select {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1.5rem;
+}
+
+.book-card button {
+  margin-top: 1rem;
+  padding: 0.4rem 0.7rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #504776;
+  color: white;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: background-color 0.2s;
+}
+
+.book-card button:hover {
+  background-color: #cf0000;
+}
+
+.book-card a {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { NavLink } from "react-router-dom";
+import "./Home.css"
 
 interface Book {
     id: string;
@@ -52,7 +53,7 @@ const Home = () => {
 
       <SearchBar onSearch={searchBooks} />
 
-      <div>
+      <div className="search-results">
         {results.map((book) => (
           <NavLink to={`/book/${book.id}`} key={book.id} className="book-result">
             {book.cover && <img src={book.cover} alt={book.title} />}

@@ -3,23 +3,23 @@ import type { UserBook } from "../types/UserBook";
 
 interface BookListProps {
   books: UserBook[];
+  token: string;
+  onStatusChange: (bookId: string, newStatus: "want-to-read" | "reading" | "finished", pagesRead?: number) => void;
+  onDelete: (bookId: string) => void;
 }
 
-const BookList = ({ books }: BookListProps) => {
-  if (books.length === 0) {
-    return <p>Inga böcker hittades.</p>;
-  }
+const BookList = ({ books, token, onStatusChange, onDelete }: BookListProps) => {
+  if (books.length === 0) return <p>Inga böcker hittades.</p>;
 
   return (
     <div className="book-grid">
-      {books.map(book => (
+      {books.map((book) => (
         <BookCard
           key={book._id}
-          title={book.title}
-          author={book.author}
-          status={book.status}
-          pagesRead={book.pagesRead}
-          cover={book.cover}
+          book={book}
+          token={token}
+          onStatusChange={onStatusChange}
+          onDelete={onDelete}
         />
       ))}
     </div>

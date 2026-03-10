@@ -174,7 +174,7 @@ const BookPage = () => {
           </>
         ) : (
           <>
-            <p>Redan i ditt bibliotek</p>
+            <p>Finns i dina sparade böcker</p>
 
             <select
               value={status}
