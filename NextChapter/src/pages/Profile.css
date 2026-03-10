@@ -1,0 +1,39 @@
+.profile-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.stats ul, .book-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.stats li, .book-list li {
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background: #504776;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #42366b;
+}
+
+.error {
+  color: #e74c3c;
+  font-weight: bold;
+}

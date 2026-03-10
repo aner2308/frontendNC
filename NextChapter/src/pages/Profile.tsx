@@ -1,7 +1,107 @@
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
+import "./Profile.css";
+import StatsCard from "../components/StatsCard";
+import BookList from "../components/BookList";
+import type { UserBook } from "../types/UserBook";
+
+interface BookStatus {
+    _id: string;
+    bookId: string;
+    status: "want-to-read" | "reading" | "finished";
+    pagesRead?: number;
+}
+
 const Profile = () => {
+    const { token, logout } = useContext(AuthContext);
+    const [books, setBooks] = useState<UserBook[]>([]);
+    const [error, setError] = useState("");
+
+    const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            if (!token) return;
+
+            try {
+                const res = await fetch("http://localhost:5000/api/books/user", {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+
+                if (!res.ok) {
+                    setError("Kunde inte hämta böcker.");
+                    return;
+                }
+
+                const statuses: BookStatus[] = await res.json();
+
+                // Filtrera bort tomma googleBookId
+                const validStatuses = statuses.filter(s => s.bookId);
+
+                const booksWithInfo: UserBook[] = await Promise.all(
+                    validStatuses.map(async (status) => {
+                        try {
+
+                            const googleRes = await fetch(
+                                `https://www.googleapis.com/books/v1/volumes/${status.bookId}&key=${API_KEY}`
+                            );
+
+                            const googleData = await googleRes.json();
+                            const volume = googleData.volumeInfo;
+
+                            return {
+                                ...status,
+                                title: volume?.title || "Okänd titel",
+                                author: volume?.authors?.[0] || "Okänd författare",
+                                cover: volume?.imageLinks?.thumbnail || null,
+                            };
+                        } catch {
+                            return {
+                                ...status,
+                                title: "Okänd titel",
+                                author: "Okänd författare",
+                                cover: null,
+                            };
+                        }
+                    })
+                );
+
+                setBooks(booksWithInfo);
+            } catch {
+                setError("Kunde inte nå servern.");
+            }
+        };
+
+        fetchBooks();
+    }, [token]);
+
+    // Statistik
+    const totalBooksRead = books.filter(b => b.status === "finished").length;
+
+    const totalPagesRead = books
+        .filter(b => b.status === "finished")
+        .reduce((sum, b) => sum + (b.pagesRead || 0), 0);
+
+    const booksReading = books.filter(b => b.status === "reading").length;
+
     return (
-        <div>
-            <h1>Profil</h1>
+        <div className="profile-container">
+            <h2>Min profil</h2>
+
+            {error && <p className="error">{error}</p>}
+
+            <div className="stats-grid">
+                <StatsCard label="Böcker lästa" value={totalBooksRead} />
+                <StatsCard label="Sidor lästa" value={totalPagesRead} />
+                <StatsCard label="Böcker läses just nu" value={booksReading} />
+            </div>
+
+            <section>
+                <h3>Mina böcker</h3>
+                <BookList books={books} />
+            </section>
+
+            <button onClick={logout}>Logga ut</button>
         </div>
     );
 };
