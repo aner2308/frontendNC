@@ -18,6 +18,16 @@ interface UserBookStatus {
   status: "want-to-read" | "reading" | "finished";
 }
 
+interface Review {
+  _id: string;
+  user: {
+    _id: string;
+    username: string;
+  };
+  rating: number;
+  reviewText: string;
+}
+
 const BookPage = () => {
   const { bookId } = useParams();
   const { token } = useContext(AuthContext);
@@ -25,10 +35,13 @@ const BookPage = () => {
   const [book, setBook] = useState<Book | null>(null);
   const [userBook, setUserBook] = useState<UserBookStatus | null>(null);
 
-  const [status, setStatus] =
-    useState<"want-to-read" | "reading" | "finished">("want-to-read");
-
+  const [status, setStatus] = useState<"want-to-read" | "reading" | "finished">("want-to-read");
   const [message, setMessage] = useState("");
+
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviewText, setReviewText] = useState("");
+  const [rating, setRating] = useState(5);
+  const [editingReviewId, setEditingReviewId] = useState<string | null>(null);
 
   // HÄMTA IN BOK
   useEffect(() => {
@@ -54,6 +67,14 @@ const BookPage = () => {
           cover: volume.imageLinks?.thumbnail,
           pageCount: volume.pageCount
         });
+
+        // Hämta recensioner
+        const reviewRes = await fetch(
+          `http://localhost:5000/api/reviews/${bookId}`
+        );
+
+        const reviewData = await reviewRes.json();
+        setReviews(reviewData);
 
         // Hämtar användarens böcker
         if (token) {
@@ -145,6 +166,76 @@ const BookPage = () => {
 
   if (!book) return <p>Laddar bok...</p>;
 
+  //Skapa eller uppdatera recension
+  const saveReview = async () => {
+    if (!token || !bookId) return;
+
+    try {
+      const url = editingReviewId
+        ? `http://localhost:5000/api/reviews/${editingReviewId}`
+        : "http://localhost:5000/api/reviews";
+
+      const method = editingReviewId ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          bookId,
+          rating,
+          reviewText,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) return;
+
+      setReviews(prev => {
+        const exists = prev.find(r => r._id === data._id);
+
+        if (exists) {
+          return prev.map(r => r._id === data._id ? data : r);
+        }
+
+        return [...prev, data];
+      });
+
+      setReviewText("");
+      setEditingReviewId(null);
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //Starta redigering av recension
+  const startEditReview = (review: Review) => {
+    setEditingReviewId(review._id);
+    setReviewText(review.reviewText);
+    setRating(review.rating);
+  };
+
+  //Radera reension
+  const deleteReview = async (id: string) => {
+    if (!token) return;
+
+    await fetch(
+      `http://localhost:5000/api/reviews/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setReviews(prev => prev.filter(r => r._id !== id));
+  };
+
   return (
     <div className="book-page">
       {book.cover && <img src={book.cover} alt={book.title} />}
@@ -197,6 +288,65 @@ const BookPage = () => {
 
         {message && <p>{message}</p>}
       </div>
+
+      <section className="reviews">
+        <h3>Recensioner</h3>
+
+        {reviews.length === 0 && <p>Inga recensioner ännu.</p>}
+
+        {reviews.map(r => (
+          <div key={r._id} className="review-card">
+            <div className="review-header">
+              <strong>{r.user.username}</strong>
+              <span className="review-rating">
+                {"⭐".repeat(r.rating)}
+              </span>
+            </div>
+            <p>{r.reviewText}</p>
+
+            {token && (
+              <div className="review-actions">
+                <button onClick={() => startEditReview(r)}>
+                  Redigera
+                </button>
+
+                <button onClick={() => deleteReview(r._id)}>
+                  Ta bort
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </section>
+
+      {token && (
+        <div className="review-form">
+          <h4>
+            {editingReviewId ? "Redigera recension" : "Skriv recension"}
+          </h4>
+
+          <select
+            value={rating}
+            onChange={e => setRating(Number(e.target.value))}
+          >
+            {[1, 2, 3, 4, 5].map(n => (
+              <option key={n} value={n}>
+                {n} ⭐
+              </option>
+            ))}
+          </select>
+
+          <textarea
+            value={reviewText}
+            onChange={e => setReviewText(e.target.value)}
+            placeholder="Vad tyckte du om boken?"
+          />
+
+          <button onClick={saveReview}>
+            {editingReviewId ? "Uppdatera" : "Publicera"}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

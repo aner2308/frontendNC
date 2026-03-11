@@ -78,10 +78,23 @@ const Profile = () => {
     //UPPDATERA STATUS
     const updateStatus = async (bookId: string, newStatus: "want-to-read" | "reading" | "finished", pagesRead?: number) => {
         try {
+
+            let updatedPagesRead = pagesRead;
+
+            if (newStatus === "finished") {
+                const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+
+                const googleRes = await fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}?key=${API_KEY}`)
+
+                const googleData = await googleRes.json();
+
+                updatedPagesRead = googleData.volumeInfo?.pageCount ?? 0;
+            }
+
             const res = await fetch("http://localhost:5000/api/books", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-                body: JSON.stringify({ bookId, status: newStatus, pagesRead }),
+                body: JSON.stringify({ bookId, status: newStatus, pagesRead: updatedPagesRead }),
             });
 
             if (!res.ok) {
@@ -90,7 +103,7 @@ const Profile = () => {
                 return;
             }
 
-            setBooks(prev => prev.map(b => b.bookId === bookId ? { ...b, status: newStatus, pagesRead: pagesRead ?? b.pagesRead } : b));
+            setBooks(prev => prev.map(b => b.bookId === bookId ? { ...b, status: newStatus, pagesRead: updatedPagesRead ?? b.pagesRead } : b));
         } catch (err) {
             console.error(err);
         }
