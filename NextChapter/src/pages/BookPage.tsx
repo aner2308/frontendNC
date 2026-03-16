@@ -34,6 +34,7 @@ const BookPage = () => {
 
   const [book, setBook] = useState<Book | null>(null);
   const [userBook, setUserBook] = useState<UserBookStatus | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   const [status, setStatus] = useState<"want-to-read" | "reading" | "finished">("want-to-read");
   const [message, setMessage] = useState("");
@@ -70,7 +71,7 @@ const BookPage = () => {
 
         // Hämta recensioner
         const reviewRes = await fetch(
-          `http://localhost:5000/api/reviews/${bookId}`
+          `https://backendnc.onrender.com/api/reviews/${bookId}`
         );
 
         const reviewData = await reviewRes.json();
@@ -79,7 +80,7 @@ const BookPage = () => {
         // Hämtar användarens böcker
         if (token) {
           const res = await fetch(
-            "http://localhost:5000/api/books/user",
+            "https://backendnc.onrender.com/api/books/user",
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -113,7 +114,7 @@ const BookPage = () => {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/books",
+        "https://backendnc.onrender.com/api/books",
         {
           method: "POST",
           headers: {
@@ -148,7 +149,7 @@ const BookPage = () => {
 
     try {
       await fetch(
-        `http://localhost:5000/api/books/${userBook._id}`,
+        `https://backendnc.onrender.com/api/books/${userBook._id}`,
         {
           method: "DELETE",
           headers: {
@@ -172,8 +173,8 @@ const BookPage = () => {
 
     try {
       const url = editingReviewId
-        ? `http://localhost:5000/api/reviews/${editingReviewId}`
-        : "http://localhost:5000/api/reviews";
+        ? `https://backendnc.onrender.com/api/reviews/${editingReviewId}`
+        : "https://backendnc.onrender.com/api/reviews";
 
       const method = editingReviewId ? "PUT" : "POST";
 
@@ -224,7 +225,7 @@ const BookPage = () => {
     if (!token) return;
 
     await fetch(
-      `http://localhost:5000/api/reviews/${id}`,
+      `https://backendnc.onrender.com/api/reviews/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -236,14 +237,46 @@ const BookPage = () => {
     setReviews(prev => prev.filter(r => r._id !== id));
   };
 
+  const getShortDescription = (html: string, length = 200) => {
+    const temp = document.createElement("div");
+    temp.innerHTML = html;
+
+    const text = temp.textContent || temp.innerText || "";
+
+    if (text.length <= length) return text;
+
+    return text.substring(0, length) + "...";
+  };
+
   return (
     <div className="book-page">
-      {book.cover && <img src={book.cover} alt={book.title} />}
+      <div className="book-header">
+        {book.cover && <img src={book.cover} alt={book.title} />}
 
-      <h2>{book.title}</h2>
-      <p>{book.author}</p>
+        <div className="book-info">
+          <h2>{book.title}</h2>
+          <p className="author">{book.author}</p>
 
-      <p dangerouslySetInnerHTML={{ __html: book.description || "" }} />
+          <div className="book-description">
+            {book.description && (
+              <>
+                {!expanded ? (
+                  <p>{getShortDescription(book.description)}</p>
+                ) : (
+                  <p dangerouslySetInnerHTML={{ __html: book.description }} />
+                )}
+
+                <button
+                  className="toggle-description"
+                  onClick={() => setExpanded(prev => !prev)}
+                >
+                  {expanded ? "Visa mindre" : "Visa mer"}
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
 
       <div className="add-book-section">
         <h3>Min lässtatus</h3>

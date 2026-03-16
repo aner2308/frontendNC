@@ -9,8 +9,17 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="nav-container">
-        <div className="logo">
-          <NavLink to="/">NextChapter</NavLink>
+
+        <div className="top-row">
+          <div className="logo">
+            <NavLink to="/"><span>Next</span>Chapter</NavLink>
+          </div>
+
+          {token && (
+            <button className="logout-btn" onClick={logout}>
+              Logga ut
+            </button>
+          )}
         </div>
 
         <ul className="nav-links">
@@ -21,18 +30,11 @@ const Header = () => {
           </li>
 
           {token ? (
-            <>
-              <li>
-                <NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>
-                  Profil
-                </NavLink>
-              </li>
-              <li>
-                <button className="logout-btn" onClick={logout}>
-                  Logga ut
-                </button>
-              </li>
-            </>
+            <li>
+              <NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>
+                Profil
+              </NavLink>
+            </li>
           ) : (
             <>
               <li>
@@ -48,6 +50,7 @@ const Header = () => {
             </>
           )}
         </ul>
+
       </nav>
     </header>
   );

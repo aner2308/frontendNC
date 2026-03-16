@@ -5,75 +5,73 @@
 }
 
 .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.top-row {
+    margin-top: 20px;
     display: flex;
-    align-items: flex-end;
     justify-content: space-between;
-    height: 80px;
+    align-items: center;
 }
 
 .logo a {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #333;
     text-decoration: none;
 }
 
-/* Lista med flikar */
-.nav-links {
-    display: flex;
-    gap: 10px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    align-items: flex-end;
+.logo a span {
+    background-color: #504776;
+    color: white;
+    padding: 1.5rem 0.8rem;
+    border-top-left-radius: 15px;
 }
 
-/* Alla länkar */
-.nav-links a {
-    box-sizing: content-box;
-    text-decoration: none;
-    padding: 6px 18px;
-    padding-top: 15px;
-    border-radius: 8px 8px 0 0;
-    background-color: #d9d9d9;
-    color: #333;
-    font-weight: 500;
-    transition: background 0.2s, color 0.2s;
-    position: relative;
-    bottom: 3px;
-}
-
-/* Hover-effekt */
-.nav-links a:hover {
-    background-color: #c0c0c0;
-    border-bottom: 7px solid #c0c0c0;
-    color: #000;
-    position: relative;
-    bottom: 10px;
-}
-
-/* Aktiv flik */
-.nav-links a.active {
-    background-color: #fff;
-    border-bottom: 7px solid #fff;
-    color: #000;
-    position: relative;
-    bottom: 10px;
-}
-
-/* Logout-knappen */
 .logout-btn {
     background: #e74c3c;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 8px 12px;
-    margin-bottom: 10px;
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.2s;
 }
 
 .logout-btn:hover {
     background: #c0392b;
+}
+
+/* Lista med flikar */
+.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    padding: 0;
+}
+
+/* Alla länkar */
+.nav-links a {
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px 8px 0 0;
+    background-color: #d9d9d9;
+    color: #333;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+/* Hover-effekt */
+.nav-links a:hover {
+    background-color: #c0c0c0;
+}
+
+/* Aktiv flik */
+.nav-links a.active {
+    background-color: #fff;
 }

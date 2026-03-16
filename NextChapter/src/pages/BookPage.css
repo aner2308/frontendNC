@@ -1,3 +1,59 @@
+.book-page {
+  display: flex;
+  flex-direction: column;
+  /* Default: små skärmar */
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.book-header {
+  display: flex;
+  flex-direction: column;
+  /* små skärmar: omslag över text */
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Bokomslag */
+.book-header img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Titel och beskrivning */
+.book-info {
+  max-width: 700px;
+  text-align: center;
+  /* Små skärmar */
+}
+
+.book-info h2 {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.book-info p.author {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+/* Större skärmar */
+@media (min-width: 768px) {
+  .book-header {
+    flex-direction: row;
+    /* omslag bredvid text */
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .book-info {
+    padding-left: 2rem;
+  }
+}
+
+
 .add-book-section {
   margin-top: 2rem;
   padding: 1.5rem;
@@ -9,6 +65,26 @@
 .add-book-section button {
   margin-right: 1rem;
   padding: 8px 12px;
+}
+
+.book-description {
+  margin-top: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.toggle-description {
+  margin-top: 0.5rem;
+  background: none;
+  border: none;
+  color: #4dabf7;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toggle-description:hover {
+  text-decoration: underline;
 }
 
 .reviews {
@@ -25,13 +101,13 @@
   border-radius: 12px;
   padding: 1.2rem;
   margin-bottom: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .review-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 .review-header {
@@ -99,5 +175,5 @@
 .review-form textarea:focus {
   outline: none;
   border-color: #4dabf7;
-  box-shadow: 0 0 0 2px rgba(77,171,247,0.2);
+  box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.2);
 }

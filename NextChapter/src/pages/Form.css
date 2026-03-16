@@ -1,10 +1,12 @@
 .form-container {
   max-width: 400px;
   margin: 50px auto;
-  background: #f9f9f9;
+  background-image: url('/images/whiteBG.jpg');
+  background-size: cover;
+  background-position: right;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 form {

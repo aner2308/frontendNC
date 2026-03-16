@@ -24,7 +24,7 @@ const Profile = () => {
             if (!token) return;
 
             try {
-                const res = await fetch("http://localhost:5000/api/books/user", {
+                const res = await fetch("https://backendnc.onrender.com/api/books/user", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
@@ -91,7 +91,7 @@ const Profile = () => {
                 updatedPagesRead = googleData.volumeInfo?.pageCount ?? 0;
             }
 
-            const res = await fetch("http://localhost:5000/api/books", {
+            const res = await fetch("https://backendnc.onrender.com/api/books", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
                 body: JSON.stringify({ bookId, status: newStatus, pagesRead: updatedPagesRead }),
@@ -115,7 +115,7 @@ const Profile = () => {
             const book = books.find(b => b.bookId === bookId);
             if (!book) return;
 
-            await fetch(`http://localhost:5000/api/books/${book._id}`, {
+            await fetch(`https://backendnc.onrender.com/api/books/${book._id}`, {
                 method: "DELETE",
                 headers: { Authorization: `Bearer ${token}` },
             });

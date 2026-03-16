@@ -2,6 +2,8 @@ import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { NavLink } from "react-router-dom";
 import "./Home.css"
+import headerImage from "../assets/headerNC.jpg";
+
 
 interface Book {
     id: string;
@@ -27,7 +29,7 @@ const Home = () => {
 
             const data = await res.json();
 
-            if(!data.items) {
+            if (!data.items) {
                 setResults([]);
                 return;
             }
@@ -41,7 +43,7 @@ const Home = () => {
 
             setResults(books);
 
-        } catch(error) {
+        } catch (error) {
             console.error(error)
         }
     }
@@ -49,20 +51,28 @@ const Home = () => {
 
     return (
         <div>
-      <h1>Hitta en bok</h1>
+            <section className="hero" style={{ backgroundImage: `url(${headerImage})` }}>
+                <div className="hero-content">
+                    <h1>Välkommen till NextChapter</h1>
+                    <p className="sub-header">Din virtuella boklista</p>
 
-      <SearchBar onSearch={searchBooks} />
+                    <div className="search-function">
+                        <h2>Hitta en bok</h2>
+                        <SearchBar onSearch={searchBooks} />
+                    </div>
+                </div>
+            </section>
 
-      <div className="search-results">
-        {results.map((book) => (
-          <NavLink to={`/book/${book.id}`} key={book.id} className="book-result">
-            {book.cover && <img src={book.cover} alt={book.title} />}
-            <h4>{book.title}</h4>
-            <p>{book.author}</p>
-          </NavLink>
-        ))}
-      </div>
-    </div>
+            <div className="search-results">
+                {results.map((book) => (
+                    <NavLink to={`/book/${book.id}`} key={book.id} className="book-result">
+                        {book.cover && <img src={book.cover} alt={book.title} />}
+                        <h4>{book.title}</h4>
+                        <p>{book.author}</p>
+                    </NavLink>
+                ))}
+            </div>
+        </div>
     );
 };
 

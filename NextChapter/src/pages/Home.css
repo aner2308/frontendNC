@@ -1,3 +1,90 @@
+/* Herosektionen */
+.hero {
+  margin-top: 2rem;
+  height: 420px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* mörk overlay på herobild */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  max-width: 700px;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero .sub-header {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  color: #f0f0f0;
+}
+
+.sub-header {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+.search-function {
+  max-width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.search-function form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-function input {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 1.6rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.search-function input:focus {
+  border-color: none;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.search-function button{
+  margin: 0;
+}
+
+.search-function button:hover{
+  cursor: pointer;
+  background-color: #3b345a;
+}
+
 .search-results {
   display: grid;
   grid-template-columns: 1fr;
