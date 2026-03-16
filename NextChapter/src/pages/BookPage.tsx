@@ -248,6 +248,7 @@ const BookPage = () => {
     return text.substring(0, length) + "...";
   };
 
+  //Utseende på boksidan
   return (
     <div className="book-page">
       <div className="book-header">

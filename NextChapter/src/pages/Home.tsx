@@ -15,11 +15,14 @@ interface Book {
 const Home = () => {
     const [results, setResults] = useState<Book[]>([]);
 
+    //Sökfunktion för sökrutan
     const searchBooks = async (query: string) => {
         try {
+            //Skickar med API nyckel
             const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
-            const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=10&key=${API_KEY}`);
+            //Hämtar de 12 första resultaten
+            const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=12&key=${API_KEY}`);
 
             if (!res.ok) {
                 console.error("Google API fel:", res.status);
@@ -48,7 +51,7 @@ const Home = () => {
         }
     }
 
-
+    //Utseende för startsida
     return (
         <div>
             <section className="hero" style={{ backgroundImage: `url(${headerImage})` }}>

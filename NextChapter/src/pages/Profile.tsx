@@ -20,7 +20,11 @@ const Profile = () => {
     const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
     useEffect(() => {
+
+        //Hämtar in användarens sparade böcker 
         const fetchBooks = async () => {
+
+            //Kontrollerar token
             if (!token) return;
 
             try {

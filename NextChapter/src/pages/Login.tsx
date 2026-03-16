@@ -16,6 +16,7 @@ const Login = () => {
         e.preventDefault();
         setError("");
 
+        //Logga in
         try {
             const res = await fetch("https://backendnc.onrender.com/api/auth/login", {
                 method: "POST",
@@ -30,14 +31,17 @@ const Login = () => {
                 return;
             }
 
+            //Lägger till token
             login(data.token);
 
+            //Skickas till startsida vid lyckad inloggning
             navigate("/");
         } catch (err) {
             setError("Kunde inte nå servern.");
         }
     };
 
+    //Utseende på logga in- sidan
     return (
         <div className="form-container">
             <h2>Logga in</h2>

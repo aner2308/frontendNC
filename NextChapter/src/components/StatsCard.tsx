@@ -3,6 +3,7 @@ interface StatsCardProps {
   value: number;
 }
 
+//Layout för lässtatistik på profil
 const StatsCard = ({ label, value }: StatsCardProps) => {
   return (
     <div className="stats-card">

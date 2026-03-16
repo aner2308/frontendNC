@@ -13,11 +13,13 @@ interface BookCardProps {
 const BookCard = ({ book, onStatusChange, onDelete }: BookCardProps) => {
   const [status, setStatus] = useState(book.status);
 
+  //Uppdaterar vid statusförändring
   const handleChange = async (newStatus: "want-to-read" | "reading" | "finished") => {
     setStatus(newStatus);
     onStatusChange(book.bookId, newStatus, newStatus === "finished" ? book.pagesRead : undefined);
   };
 
+  //Utseende för bokkort
   return (
     <div className="book-card">
       <Link to={`/book/${book.bookId}`}>

@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+# NextChapter – Anton Eriksson
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Denna sida är en enkel boksida byggd med **React + TypeScript**. Boksidan är skapad som lösning för slutprojektet i kursen *Datateknik GR (B), Fördjupad frontend-utveckling DT210G.* 
+Användare kan besöka sidan för att söka på böcker och ta del av informtion, eller logga in och få tillgåg till mer ingående funktioner.
 
-Currently, two official plugins are available:
+## Funktioner
+### Ej inloggad
+- Sök efter böcker
+- Ta del av bokinformation + recensioner
+- Logga in / Skapa användare
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Inloggad
+- Spara böcker
+- Ändra lässtatus på sina sparade böcker
+- Recensera böcker
+- Redigera / ta bort egna recensioner
+- JWT-baserad autentisering
 
-## React Compiler
+## Tekniker
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- TypeScript
+- React Router
+- Context API
+- CSS
 
-## Expanding the ESLint configuration
+## Kör projektet lokalt
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+git clone https://github.com/aner2308/frontendNC.git
+npm install
+npm run dev
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Publicering
+Boksidan NextChapter är publicerad på netlify: 
+https://nextchapterproject.netlify.app/

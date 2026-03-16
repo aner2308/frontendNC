@@ -8,9 +8,11 @@ interface BookListProps {
   onDelete: (bookId: string) => void;
 }
 
+//Lista med böcker vid sökning
 const BookList = ({ books, token, onStatusChange, onDelete }: BookListProps) => {
   if (books.length === 0) return <p>Inga böcker hittades.</p>;
 
+  //Utseende på böckerna
   return (
     <div className="book-grid">
       {books.map((book) => (

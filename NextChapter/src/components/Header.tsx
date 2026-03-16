@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import "./Header.css"; // separat CSS-fil
+import "./Header.css";
 
+//Header-sektion med navigation
 const Header = () => {
   const { token, logout } = useContext(AuthContext);
 
@@ -10,6 +11,7 @@ const Header = () => {
     <header className="header">
       <nav className="nav-container">
 
+        {/* Logo och Logga ut ligger på rad över menyn*/}
         <div className="top-row">
           <div className="logo">
             <NavLink to="/"><span>Next</span>Chapter</NavLink>
@@ -22,6 +24,7 @@ const Header = () => {
           )}
         </div>
 
+        {/*Navigationsmenyn*/}
         <ul className="nav-links">
           <li>
             <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
@@ -29,6 +32,7 @@ const Header = () => {
             </NavLink>
           </li>
 
+          {/* Olika länkar beroende på om man är inloggad eller inte*/}
           {token ? (
             <li>
               <NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>

@@ -11,11 +11,12 @@ const Register = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.ChangeEvent) => {
     e.preventDefault();
     setError("");
     setSuccess("");
 
+    //Lägg till y användare till databasen
     try {
       const res = await fetch("https://backendnc.onrender.com/api/auth/register", {
         method: "POST",
@@ -44,6 +45,7 @@ const Register = () => {
     }
   };
 
+  //Utseende på registrera- sidan
   return (
     <div className="form-container">
       <h2>Skapa användare</h2>
