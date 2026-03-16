@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import "./Profile.css";
 import StatsCard from "../components/StatsCard";
 import BookList from "../components/BookList";
-import type { BookStatusType, UserBook } from "../types/UserBook";
+import type { UserBook } from "../types/UserBook";
 
 interface BookStatus {
     _id: string;

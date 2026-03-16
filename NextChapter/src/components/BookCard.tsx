@@ -10,7 +10,7 @@ interface BookCardProps {
   onDelete: (bookId: string) => void;
 }
 
-const BookCard = ({ book, token, onStatusChange, onDelete }: BookCardProps) => {
+const BookCard = ({ book, onStatusChange, onDelete }: BookCardProps) => {
   const [status, setStatus] = useState(book.status);
 
   const handleChange = async (newStatus: "want-to-read" | "reading" | "finished") => {
