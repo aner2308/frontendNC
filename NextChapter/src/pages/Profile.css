@@ -6,12 +6,14 @@
   border-radius: 8px;
 }
 
-.stats ul, .book-list ul {
+.stats ul,
+.book-list ul {
   list-style: none;
   padding: 0;
 }
 
-.stats li, .book-list li {
+.stats li,
+.book-list li {
   margin-bottom: 10px;
 }
 
@@ -19,8 +21,14 @@ h3 {
   margin-top: 20px;
 }
 
-h4 {
-  margin-top: 20px;
+.statusRubrik {
+  margin-top: 50px;
+  text-align: center;
+  background-color: #504776;
+  padding: 5px 0px;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 button {

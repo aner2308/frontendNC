@@ -157,13 +157,13 @@ const Profile = () => {
 
             <section>
                 <h3>Mina böcker</h3>
-                <h4>Vill läsa</h4>
+                <h4 className="statusRubrik">Vill läsa</h4>
                 <BookList books={wantToReadBooks} token={token} onStatusChange={updateStatus} onDelete={deleteBook} />
                 
-                <h4>Läser just nu</h4>
+                <h4 className="statusRubrik">Läser just nu</h4>
                 <BookList books={readingBooks} token={token} onStatusChange={updateStatus} onDelete={deleteBook} />
                 
-                <h4>Har läst</h4>
+                <h4 className="statusRubrik">Har läst</h4>
                 <BookList books={finishedBooks} token={token} onStatusChange={updateStatus} onDelete={deleteBook} />
             </section>
 
