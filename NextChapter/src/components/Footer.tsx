@@ -4,8 +4,30 @@
 const Footer = () => {
     return (
         <footer className="footer">
-            <p><strong>Anton Eriksson</strong></p>
-            <p>2026</p>
+            <div className="footer-content">
+
+                <p className="footer-title">
+                    NextStory
+                </p>
+
+                <p className="footer-description">
+                    En personlig bokplattform för att hålla koll på läsning och recensioner.
+                </p>
+
+                <nav className="footer-links">
+                    <a href="/">Start</a>
+                    <a href="/profile">Profil</a>
+                </nav>
+
+                <p className="footer-tech">
+                    • Byggd med React •
+                </p>
+
+                <p className="footer-copy">
+                    © {new Date().getFullYear()} Anton Eriksson
+                </p>
+
+            </div>
         </footer>
     );
 };
