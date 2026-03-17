@@ -69,7 +69,6 @@ main {
   background: #504776;
   margin-top: 4rem;
   padding: 2rem;
-  background: #111;
   color: white;
   text-align: center;
 }
@@ -77,7 +76,7 @@ main {
 .footer a {
   color: #ccc;
   margin: 0 10px;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .footer a:hover {

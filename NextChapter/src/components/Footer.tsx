@@ -10,13 +10,9 @@ const Footer = () => {
                     NextStory
                 </p>
 
-                <p className="footer-description">
-                    En personlig bokplattform för att hålla koll på läsning och recensioner.
-                </p>
-
                 <nav className="footer-links">
-                    <a href="/">Start</a>
-                    <a href="/profile">Profil</a>
+                    <a href="/">Hem  |</a>
+                    <a href="/profile">|  Profil</a>
                 </nav>
 
                 <p className="footer-tech">
