@@ -139,6 +139,10 @@ const Profile = () => {
 
     const booksReading = books.filter(b => b.status === "reading").length;
 
+    const wantToReadBooks = books.filter(b => b.status === "want-to-read");
+    const readingBooks = books.filter(b => b.status === "reading");
+    const finishedBooks = books.filter(b => b.status === "finished");
+
     return (
         <div className="profile-container">
             <h2>Min profil</h2>
@@ -153,7 +157,14 @@ const Profile = () => {
 
             <section>
                 <h3>Mina böcker</h3>
-                <BookList books={books} token={token} onStatusChange={updateStatus} onDelete={deleteBook} />
+                <h4>Vill läsa</h4>
+                <BookList books={wantToReadBooks} token={token} onStatusChange={updateStatus} onDelete={deleteBook} />
+                
+                <h4>Läser just nu</h4>
+                <BookList books={readingBooks} token={token} onStatusChange={updateStatus} onDelete={deleteBook} />
+                
+                <h4>Har läst</h4>
+                <BookList books={finishedBooks} token={token} onStatusChange={updateStatus} onDelete={deleteBook} />
             </section>
 
             <button onClick={logout}>Logga ut</button>
