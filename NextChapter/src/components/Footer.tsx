@@ -11,8 +11,9 @@ const Footer = () => {
                 </p>
 
                 <nav className="footer-links">
-                    <a href="/">Hem  |</a>
-                    <a href="/profile">|  Profil</a>
+                    <a href="/">Hem</a>
+                    |
+                    <a href="/profile">Profil</a>
                 </nav>
 
                 <p className="footer-tech">
