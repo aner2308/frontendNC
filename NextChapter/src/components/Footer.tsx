@@ -16,26 +16,22 @@ const Footer = () => {
 
                 <nav className="footer-links">
                     {token ? (
+                        <>
+                            <NavLink to="/">
+                                Hem
+                            </NavLink>
+                            |
+                            <NavLink to="/profile">
+                                Profil
+                            </NavLink>
+                        </>
+                    ) : (
                         <NavLink to="/">
                             Hem
                         </NavLink>
-                    ) : (
-                        <>
-                            <li>
-                                <NavLink to="/">
-                                    Hem
-                                </NavLink>
-                            </li>
-                            |
-                            <li>
-                                <NavLink to="/profile">
-                                    Profil
-                                </NavLink>
-                            </li>
-                        </>
                     )}
                 </nav>
-                
+
                 <p className="footer-tech">
                     • Byggd med React •
                 </p>
