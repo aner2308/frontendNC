@@ -1,7 +1,11 @@
-
+import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 //Footer
 const Footer = () => {
+    const { token } = useContext(AuthContext);
+
     return (
         <footer className="footer">
             <div className="footer-content">
@@ -11,11 +15,27 @@ const Footer = () => {
                 </p>
 
                 <nav className="footer-links">
-                    <a href="/">Hem</a>
-                    |
-                    <a href="/profile">Profil</a>
+                    {token ? (
+                        <NavLink to="/">
+                            Hem
+                        </NavLink>
+                    ) : (
+                        <>
+                            <li>
+                                <NavLink to="/">
+                                    Hem
+                                </NavLink>
+                            </li>
+                            |
+                            <li>
+                                <NavLink to="/profile">
+                                    Profil
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
                 </nav>
-
+                
                 <p className="footer-tech">
                     • Byggd med React •
                 </p>

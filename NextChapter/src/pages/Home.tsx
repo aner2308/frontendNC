@@ -11,7 +11,7 @@ interface Book {
     author: string;
     cover?: string;
 }
-
+ 
 const Home = () => {
     const [results, setResults] = useState<Book[]>([]);
 
