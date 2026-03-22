@@ -3,6 +3,9 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "./BookPage.css"
 
+//Löser felmeddelanden för thumbnails
+const imageSecurity = ( url?: string) => url?.replace('http://','https://')
+
 interface Book {
   id: string;
   title: string;
@@ -30,7 +33,7 @@ interface Review {
 
 const BookPage = () => {
   const { bookId } = useParams();
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
 
   const [book, setBook] = useState<Book | null>(null);
   const [userBook, setUserBook] = useState<UserBookStatus | null>(null);
@@ -252,7 +255,7 @@ const BookPage = () => {
   return (
     <div className="book-page">
       <div className="book-header">
-        {book.cover && <img src={book.cover} alt={book.title} />}
+        {book.cover && <img src={imageSecurity(book.cover)} alt={book.title} />}
 
         <div className="book-info">
           <h2>{book.title}</h2>
@@ -338,7 +341,7 @@ const BookPage = () => {
             </div>
             <p>{r.reviewText}</p>
 
-            {token && (
+            {user?.id === r.user._id && (
               <div className="review-actions">
                 <button onClick={() => startEditReview(r)}>
                   Redigera

@@ -32,7 +32,7 @@ const Login = () => {
             }
 
             //Lägger till token
-            login(data.token);
+            login(data.token, data.user);
 
             //Skickas till startsida vid lyckad inloggning
             navigate("/");

@@ -5,6 +5,7 @@ import StatsCard from "../components/StatsCard";
 import BookList from "../components/BookList";
 import type { UserBook } from "../types/UserBook";
 
+
 interface BookStatus {
     _id: string;
     bookId: string;
@@ -75,7 +76,7 @@ const Profile = () => {
                 setError("Kunde inte nå servern.");
             }
         };
-
+ 
         fetchBooks();
     }, [token]);
 

@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import "./Home.css"
 import headerImage from "../assets/headerNC.jpg";
 
+//Löser felmeddelanden för thumbnails
+const imageSecurity = ( url?: string) => url?.replace('http://','https://')
 
 interface Book {
     id: string;
@@ -69,7 +71,7 @@ const Home = () => {
             <div className="search-results">
                 {results.map((book) => (
                     <NavLink to={`/book/${book.id}`} key={book.id} className="book-result">
-                        {book.cover && <img src={book.cover} alt={book.title} />}
+                        {book.cover && <img src={imageSecurity(book.cover)} alt={book.title} />}
                         <h4>{book.title}</h4>
                         <p>{book.author}</p>
                     </NavLink>

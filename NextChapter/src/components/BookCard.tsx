@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import type { UserBook } from "../types/UserBook";
 import "./BookCard.css"
 
+//Löser felmeddelanden för thumbnails
+const imageSecurity = ( url?: string) => url?.replace('http://','https://')
+
 interface BookCardProps {
   book: UserBook;
   token: string;
@@ -23,7 +26,7 @@ const BookCard = ({ book, onStatusChange, onDelete }: BookCardProps) => {
   return (
     <div className="book-card">
       <Link to={`/book/${book.bookId}`}>
-        {book.cover && <img src={book.cover} alt={book.title} />}
+        {book.cover && <img src={imageSecurity(book.cover)} alt={book.title} />}
         <h4>{book.title}</h4>
         <p>{book.author}</p>
       </Link>
